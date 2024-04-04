@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: test-web-app
+  labels:
+    name: test-web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: test-web-app
+  template:
+    metadata:
+      name: test-web-app
+      labels:
+        name: test-web-app
+    spec:
+      containers:
+        - name: test-web-app
+          image: gcr.io/aniv-data-staging/test-web-app:v1
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          env:
+            - name: DEBUG_MODE
+              value: "1"
